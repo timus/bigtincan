@@ -65,8 +65,8 @@ class urlInputCommand extends Command
     {
         $url = $input->getOption('url');
         $validTill = (int)$input->getOption('validtill');
-        $this->urlService->create($url, $validTill);
-
+        $url = $this->urlService->create($url, $validTill);
+        echo $url->getShortUrl() . ' created';
         return 0;
     }
 }

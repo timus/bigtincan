@@ -154,4 +154,12 @@ class Url
     {
         return $this->url;
     }
+
+    /**
+     * @return string
+     */
+    public function getShortUrl(): string
+    {
+        return $this->shortUrl;
+    }
 }

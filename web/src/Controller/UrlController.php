@@ -17,7 +17,7 @@ class UrlController
 {
     /**
      * resolve short URL
-     * @Route("/url/{shortUrl}/resolve", name="resolve-short-url", methods={"GET"})
+     * @Route("/url/{shortUrl}/", name="resolve-short-url", methods={"GET"})
      * @param UrlServiceInterface $urlService
      * @param $shortUrl
      * @return JsonResponse

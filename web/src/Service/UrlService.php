@@ -61,7 +61,8 @@ class UrlService implements UrlServiceInterface
      */
     public function getFullUrl(string $shortUrl): ?string
     {
-        //TODO : create a seperate service for access log and inject that service on this service
+        // TODO : create a seperate service for access log and inject that service on this service
+        // ideally I would not prefer to keep them on mysql , i would rather introduce something like elastic search and have a kibana dashboard
         $url = $this->urlRepository
             ->getFullUrlByShortUrl($shortUrl);
         if (!$this->checkUrlExpiry($url)) {

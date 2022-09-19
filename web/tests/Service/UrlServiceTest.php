@@ -10,7 +10,7 @@ use Mockery;
 use DateTime;
 
 /**
- * Class DashboardCacheServiceTest
+ * Class UrlServiceTest
  *
  * @package Tests\AppBundle\Service
  */

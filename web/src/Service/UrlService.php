@@ -25,7 +25,7 @@ class UrlService implements UrlServiceInterface
 
 
     /**
-     * DashboardCacheService constructor.
+     * UrlService constructor.
      *
      * @param UrlRepository $urlRepository
      */

@@ -20,17 +20,21 @@ class UrlController
      * @Route("/url/{shortUrl}/", name="resolve-short-url", methods={"GET"})
      * @param UrlServiceInterface $urlService
      * @param $shortUrl
-     * @return JsonResponse
+     * @return RedirectResponse | JsonResponse
      */
     public function getUrl(
         UrlServiceInterface $urlService,
         $shortUrl
-    ): RedirectResponse
+    )
     {
-        return new RedirectResponse(
-            $urlService->getFullUrl(
-                $shortUrl
-            )
+        $url = $urlService->getFullUrl(
+            $shortUrl
         );
+        if (isset($url)) {
+            return new RedirectResponse($url);
+        } else {
+            //TODO : Keep all constants in seperate place
+            return new JsonResponse('Url is expired or does not exists');
+        }
     }
 }

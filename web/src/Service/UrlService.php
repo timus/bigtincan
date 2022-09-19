@@ -55,7 +55,6 @@ class UrlService implements UrlServiceInterface
 
     }
 
-
     /**
      * @param string $shortUrl
      * @return string|null
@@ -63,8 +62,13 @@ class UrlService implements UrlServiceInterface
     public function getFullUrl(string $shortUrl): ?string
     {
         //TODO : create a seperate service for access log and inject that service on this service
-        return $this->urlRepository
+        $url = $this->urlRepository
             ->getFullUrlByShortUrl($shortUrl);
+        if (!$this->checkUrlExpiry($url)) {
+            return $url->getUrl();
+        }
+        return null;
+
     }
 
     /**
@@ -73,5 +77,18 @@ class UrlService implements UrlServiceInterface
     private function createShortUrl(): string
     {
         return bin2hex(random_bytes(3));
+    }
+
+    /**
+     * @param Url $url
+     * @return string
+     */
+    private function checkUrlExpiry(Url $url): bool
+    {
+        $urlExpiryHour = $url->getValidHours();
+        $urlCreated = $url->getCreated()->format('U');
+        // Ideally this should sit in date service
+        $dateDiffInHours = round((Date('U') - $urlCreated) / 3600, 1);
+        return $dateDiffInHours > $urlExpiryHour;
     }
 }

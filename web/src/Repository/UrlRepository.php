@@ -29,16 +29,14 @@ class UrlRepository extends ServiceEntityRepository
     /**
      * @param string $shortUrl
      * @param false $deleted
-     * @return string|null
+     * @return Url|null
      */
-    public function getFullUrlByShortUrl(string $shortUrl, bool $deleted = false): ?string
+    public function getFullUrlByShortUrl(string $shortUrl, bool $deleted = false): ?Url
     {
-       //TODO : add a logic to factor expiry Url
-        $url= $this->findOneBy([
+        return $url = $this->findOneBy([
             'shortUrl' => $shortUrl,
             'deleted' => $deleted,
         ]);
-        return $url->getUrl();
     }
 
     /**
